@@ -1,0 +1,27 @@
+name: V2ray URL Processor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x' 
+    - name: Install dependencies
+      run: pip install requests
+    - name: Run Python script
+      run: python mian.py
+    - name: Commit and push
+      run: |
+        git config --global user.name "acymz"
+        git config --global user.email "cymz6@hotmail.com"
+        git add data/V2.txt history/V2_$(date +%Y%m%d%H%M).txt
+        git commit -m "Update V2.txt and add to history"
+        git push
