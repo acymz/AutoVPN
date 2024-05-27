@@ -17,11 +17,11 @@ jobs:
     - name: Install dependencies
       run: pip install requests
     - name: Run Python script
-      run: python mian.py
+      run: python main.py
     - name: Commit and push
       run: |
         git config --global user.name "acymz"
         git config --global user.email "cymz6@hotmail.com"
         git add data/V2.txt history/V2_$(date +%Y%m%d%H%M).txt
         git commit -m "Update V2.txt and add to history"
-        git push
+        git push -f
